@@ -2,6 +2,16 @@
 
 Similar to [React's built-in `Children.toArray` method](https://reactjs.org/docs/react-api.html#reactchildrentoarray), this utility takes children and returns them as an array for introspection or filtering. Different from `toArray`, it will ensure element keys are unique, preserved, and stable between renders, and traverses into fragments and maintains their keys, too.
 
+## getting started
+
+```
+npm install react-keyed-flatten-children
+```
+
+```
+yarn add react-keyed-flatten-children
+```
+
 ## why?
 
 From the documentation of Children.toArray:
@@ -16,7 +26,7 @@ Unfortunately it has some thorny edges:
 
 ### for library authors
 
-`react-keyed-flatten-children` is a drop-in replacement for `Children.toArray`.
+`react-keyed-flatten-children` is a drop-in replacement for `Children.toArray`. In this example, instead of needing to rely on the child's array index, we can reference the key:
 
 ```jsx
 import flattenChildren from "react-keyed-flatten-children";
