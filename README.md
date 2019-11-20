@@ -1,5 +1,7 @@
 # react-keyed-flatten-children
 
+[![Build Status](https://travis-ci.org/grrowl/react-keyed-flatten-children.svg?branch=master)](https://travis-ci.org/grrowl/react-keyed-flatten-children)
+
 Similar to [React's built-in `Children.toArray` method](https://reactjs.org/docs/react-api.html#reactchildrentoarray), this utility takes children and returns them as an array for introspection or filtering. Different from `toArray`, it will ensure element keys are unique, preserved, and stable between renders, and traverses into fragments and maintains their keys, too.
 
 ## getting started
