@@ -1,15 +1,32 @@
 {
   "name": "react-keyed-flatten-children",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Flattens React children and fragments to an array with predictable and stable keys",
   "main": "index.js",
+  "homepage": "https://github.com/grrowl/react-keyed-flatten-children",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grrowl/react-keyed-flatten-children.git"
+  },
   "scripts": {
     "build": "tsc",
-    "test": "ts-node node_modules/tape/bin/tape *.spec.tsx"
+    "test": "ts-node node_modules/tape/bin/tape *.spec.tsx",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "fragment",
+    "flatten",
+    "children",
+    "utility"
+  ],
+  "author": "Tom McKenzie <tom@chillidonut.com>",
+  "license": "MIT",
+  "files": [
+    "index.ts",
+    "index.js",
+    "index.d.ts"
+  ],
   "devDependencies": {
     "@types/react": "^16.9.11",
     "@types/react-is": "^16.7.1",
