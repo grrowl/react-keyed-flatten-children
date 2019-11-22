@@ -28,7 +28,7 @@ export default function flattenChildren(
         if (isValidElement(node)) {
           acc.push(
             cloneElement(node, {
-              key: `${keys.join(".")}.${node.key}`
+              key: keys.concat(String(node.key)).join('.')
             })
           );
         } else if (typeof node === "string" || typeof node === "number") {

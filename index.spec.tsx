@@ -32,13 +32,13 @@ test("simple children", function(t) {
 
         t.equal(
           isElement(result[0]) && result[0].key,
-          "..0",
+          ".0",
           "0th element key"
         );
         t.equal(result[1], "two", "1st text child");
         t.equal(
           isElement(result[2]) && result[2].key,
-          "..2",
+          ".2",
           "2nd element key"
         );
         t.equal(result[3], "10", "3rd number child");
@@ -63,17 +63,17 @@ test("conditional children", function(t) {
 
         t.equal(
           isElement(result[0]) && result[0].key,
-          "..0",
+          ".0",
           "0th element key"
         );
         t.equal(
           isElement(result[1]) && result[1].key,
-          "..2",
+          ".2",
           "2nd element key"
         );
         t.equal(
           isElement(result[2]) && result[2].key,
-          "..4",
+          ".4",
           "4th element key"
         );
       }}
@@ -96,7 +96,7 @@ test("keyed children", function(t) {
         t.equal(result.length, 5, "array length");
         t.deepEqual(
           result.map((c: any) => c.key),
-          ["..$one", "..$two", undefined, "..$four", "..4"],
+          [".$one", ".$two", undefined, ".$four", ".4"],
           "element keys"
         );
       }}
@@ -169,7 +169,7 @@ test("array children", function(t) {
         t.equal(result.length, 5, "array length");
         t.deepEqual(
           result.map((c: any) => c.key),
-          ["..0", undefined, "..1:$apple", "..1:2", "..2"],
+          [".0", undefined, ".1:$apple", ".1:2", ".2"],
           "element keys"
         );
       }}
@@ -211,7 +211,7 @@ test("renders through to react", function(t) {
   t.equal(children.length, 6, "props.children.length");
   t.deepEqual(
     children.map((c: any) => c.key),
-    ["..0", ".$apple..$one", ".$apple..$two", "..2", ".$banana..$three", "..5"],
+    [".0", ".$apple..$one", ".$apple..$two", ".2", ".$banana..$three", ".5"],
     "element keys"
   );
 });
