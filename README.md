@@ -23,8 +23,14 @@ From the documentation of Children.toArray:
 Unfortunately it has some thorny edges:
 
 - [Children.toArray does not return a flat array of all children](https://github.com/facebook/react/issues/6889), skipping Fragments by design.
-- Existing solutions exist, but they do not key the children, so you throw away valuable baked-in performance optimisations provided through stable keys.
+- Existing solutions exist, but they do not key the children they return, so you throw away valuable baked-in performance opportunities provided through stable keys.
 - You're probably doing something a little wild anyway, so you want the concept of "children" to as predictable as possible for you, and for the consumers of your library or component, [to avoid issues like this down the line](https://github.com/ReactTraining/react-router/issues/5785#issuecomment-351067856).
+
+[View the codesandbox here](https://codesandbox.io/s/react-keyed-flatten-children-example-yghsp) to get hands-on with how and when to utilise this module.
+
+### for using this in your app
+
+I've written a more straightforward, userland-focussed explanation in my article ["Fixing Children.toArray's thorny edges"](https://tommckenzie.dev/posts/react-keyed-flatten-children.html).
 
 ### for library authors
 
