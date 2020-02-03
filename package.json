@@ -23,7 +23,6 @@
   "author": "Tom McKenzie <tom@chillidonut.com>",
   "license": "MIT",
   "files": [
-    "index.ts",
     "index.js",
     "index.d.ts"
   ],
