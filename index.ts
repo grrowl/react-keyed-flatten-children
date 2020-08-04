@@ -12,9 +12,9 @@ export default function flattenChildren(
   children: ReactNode,
   depth: number = 0,
   keys: (string | number)[] = []
-) {
+): ReactChild[] {
   return Children.toArray(children).reduce(
-    (acc: ReactChild[], node: ReactNode, nodeIndex) => {
+    (acc: ReactChild[], node, nodeIndex) => {
       if (isFragment(node)) {
         acc.push.apply(
           acc,
