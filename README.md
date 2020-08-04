@@ -26,7 +26,7 @@ Unfortunately it has some thorny edges:
 - Existing solutions exist, but they do not preserve the keys of the children and fragments, which throws away valuable performance optimisations provided through React keys.
 - You're might be doing something a little wild, so you want the concept of "children" to as predictable as possible for you, and for the consumers of your library or component, [to avoid issues like this down the line](https://github.com/ReactTraining/react-router/issues/5785#issuecomment-351067856).
 
-Some have proposed, soon after Fragments were introduced, that [a built-in `React.Children.toFlatArray` would be useful](https://github.com/reactjs/rfcs/pull/61), but
+Some have proposed, soon after Fragments were introduced, that [a built-in `React.Children.toFlatArray` would be useful](https://github.com/reactjs/rfcs/pull/61), but it was decided against since "`React.Children` is in maintenance mode" until a better solution is devised.
 
 [View the codesandbox here](https://codesandbox.io/s/react-keyed-flatten-children-example-yghsp) to get hands-on with how and when to utilise this module.
 
