@@ -36,6 +36,7 @@
     "index.d.ts"
   ],
   "devDependencies": {
+    "@types/node": "^16.18.32",
     "@types/react": "^18.2.7",
     "@types/react-is": "^18.2.0",
     "@types/react-test-renderer": "^18.0.0",
