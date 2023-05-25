@@ -1,3 +1,9 @@
+# 2.0.0
+
+BREAKING: Package is now ESM-compatible (thanks @imjordanxd!)
+
+Bumps a number of deep dependencies with security issues
+
 # 1.2.0
 
 Removes `index.ts` from the distributed package
