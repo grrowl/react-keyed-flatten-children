@@ -1,3 +1,7 @@
+# 2.1.0
+
+Now using React 18.2.0 and Typescript 5.4. If this change effects your application, depend directly on 2.0.0
+
 # 2.0.0
 
 BREAKING: Package is now ESM-compatible (thanks @imjordanxd!)
