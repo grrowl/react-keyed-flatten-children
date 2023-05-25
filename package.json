@@ -32,8 +32,7 @@
   "author": "Tom McKenzie <tom@chillidonut.com>",
   "license": "MIT",
   "files": [
-    "index.js",
-    "index.d.ts"
+    "dist/"
   ],
   "devDependencies": {
     "@types/node": "^16.18.32",
