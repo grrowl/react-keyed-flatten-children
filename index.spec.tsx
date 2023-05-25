@@ -1,11 +1,12 @@
 import test from "tape";
 import flattenChildren from "./index";
 import TestRenderer, { ReactTestRendererTree } from "react-test-renderer";
-import React, { Fragment, FunctionComponent } from "react";
+import React, { Fragment, FunctionComponent, ReactNode } from "react";
 import { isElement } from "react-is";
 
 const Assert: FunctionComponent<{
   assert: (result: ReturnType<typeof flattenChildren>) => void;
+  children: ReactNode
 }> = (props: any) => {
   const result = flattenChildren(props.children);
   props.assert(result);
@@ -15,8 +16,21 @@ const Assert: FunctionComponent<{
 function getRenderedChildren(rendererTree: ReactTestRendererTree | null) {
   if (!rendererTree || !rendererTree.rendered) throw new Error("No render");
 
-  if (!rendererTree.rendered.props.children)
+  // if rendered is an array, return the array of children from each tree
+  if (Array.isArray(rendererTree.rendered)) {
+    return rendererTree.rendered.reduce((acc: Array<any>, tree: ReactTestRendererTree) => {
+      if (tree.props && tree.props.children) {
+        return acc.concat(tree.props.children);
+      } else {
+        throw new Error("No rendered props.children in one of the trees");
+      }
+    }, []);
+  }
+
+  // if rendered is a single tree
+  if (!rendererTree.rendered.props || !rendererTree.rendered.props.children)
     throw new Error("No rendered props.children");
+
 
   return rendererTree.rendered.props.children as Array<any>;
 }
