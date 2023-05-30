@@ -1,3 +1,7 @@
+# 2.2.1
+
+Removed invalid key `types` from `package.json` (thanks @imjordanxd)
+
 # 2.2.0
 
 Fix issue with build, `dist/` wasn't included with the ESM change (thanks @imjordanxd)
