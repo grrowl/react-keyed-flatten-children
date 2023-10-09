@@ -1,24 +1,24 @@
 {
   "name": "react-keyed-flatten-children",
-  "version": "2.2.1",
+  "version": "3.0.0",
   "description": "Flattens React children and fragments to an array with predictable and stable keys",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "homepage": "https://github.com/grrowl/react-keyed-flatten-children",
   "repository": {
     "type": "git",
     "url": "https://github.com/grrowl/react-keyed-flatten-children.git"
   },
   "scripts": {
-    "prebuild": "rm -rf ./dist",
-    "build": "tsc -b tsconfig.cjs.json tsconfig.esm.json",
-    "test": "ts-node node_modules/tape/bin/tape *.spec.tsx",
+    "build": "tsup index.ts --format esm,cjs --clean --dts --cjsInterop --splitting",
+    "test": "tsx index.spec.tsx",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -42,8 +42,9 @@
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-test-renderer": "^18.2.0",
-    "tape": "^5.6.3",
-    "ts-node": "^10.9.1",
+    "tape": "^5.7.0",
+    "tsup": "^7.2.0",
+    "tsx": "^3.13.0",
     "typescript": "^5.0.4"
   },
   "dependencies": {
