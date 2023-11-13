@@ -6,16 +6,17 @@ Transpile to ES2015.
 
 CommonJS now uses `module.exports` rather than `exports.default`. This
 allows for importing in CommonJS without requiring explicit `default`. e.g.
+
 ```js
 // Previous:
-const flattenChildren = require("react-keyed-flatten-children")
-flattenChildren.default(children)
+const flattenChildren = require("react-keyed-flatten-children");
+flattenChildren.default(children);
 // Now:
-const flattenChildren = require("react-keyed-flatten-children")
-flattenChildren(children)
+const flattenChildren = require("react-keyed-flatten-children");
+flattenChildren(children);
 ```
 
-
+(thanks @will-stone)
 
 # 2.2.1
 
