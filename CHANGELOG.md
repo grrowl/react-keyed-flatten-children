@@ -1,3 +1,22 @@
+# 3.0.0
+
+Convert to ESM by default.
+
+Transpile to ES2015.
+
+CommonJS now uses `module.exports` rather than `exports.default`. This
+allows for importing in CommonJS without requiring explicit `default`. e.g.
+```js
+// Previous:
+const flattenChildren = require("react-keyed-flatten-children")
+flattenChildren.default(children)
+// Now:
+const flattenChildren = require("react-keyed-flatten-children")
+flattenChildren(children)
+```
+
+
+
 # 2.2.1
 
 Removed invalid key `types` from `package.json` (thanks @imjordanxd)

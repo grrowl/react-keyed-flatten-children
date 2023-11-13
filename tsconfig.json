@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2015",
     "jsx": "react",
     "declaration": true,
-    "moduleResolution": "node",
+    "module": "ES2015",
+    "moduleResolution": "Bundler",
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
+  "include": ["index.ts"],
   "exclude": ["*.spec.tsx"]
 }
