@@ -1,3 +1,12 @@
+# 3.0.2
+
+Bump braces from 3.0.2 to 3.0.3
+Migrate `yarn.lock` to `package-lock.json`
+
+# 3.0.1
+
+Bump micromatch from 4.0.5 to 4.0.8
+
 # 3.0.0
 
 Convert to ESM by default.
