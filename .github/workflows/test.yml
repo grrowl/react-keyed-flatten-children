@@ -23,6 +23,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: yarn install
+      - run: npm ci
 
-      - run: yarn test
+      - run: npm test

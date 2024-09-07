@@ -1,6 +1,7 @@
 # 3.0.2
 
 Bump braces from 3.0.2 to 3.0.3
+
 Migrate `yarn.lock` to `package-lock.json`
 
 # 3.0.1
