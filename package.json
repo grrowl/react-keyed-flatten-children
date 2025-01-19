@@ -53,6 +53,6 @@
     "react-is": "^19.0.0"
   },
   "peerDependencies": {
-    "react": ">=19.0.0"
+    "react": ">=15.0.0"
   }
 }
