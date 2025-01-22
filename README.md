@@ -98,7 +98,7 @@ const FlexibleSwitch = ({ children }) => (
 const AppRoutes = ({ user }) => (
   <Router>
     <GlobalNavigation user={user} />
-    <Switch>
+    <FlexibleSwitch>
       <Route path="/about">
         <About />
       </Route>
@@ -115,7 +115,7 @@ const AppRoutes = ({ user }) => (
       <Route path="/">
         <Home />
       </Route>
-    </Switch>
+    </FlexibleSwitch>
   </Router>
 );
 ```
