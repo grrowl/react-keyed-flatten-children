@@ -21,18 +21,10 @@
     "test": "tsx index.spec.tsx",
     "prepublishOnly": "npm run build"
   },
-  "keywords": [
-    "react",
-    "fragment",
-    "flatten",
-    "children",
-    "utility"
-  ],
+  "keywords": ["react", "fragment", "flatten", "children", "utility"],
   "author": "Tom McKenzie <tom@chillidonut.com>",
   "license": "MIT",
-  "files": [
-    "dist/"
-  ],
+  "files": ["dist/"],
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
@@ -53,6 +45,6 @@
     "react-is": "^19.0.0"
   },
   "peerDependencies": {
-    "react": ">=15.0.0"
+    "react": ">=19.0.0"
   }
 }
