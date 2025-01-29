@@ -1,49 +1,60 @@
-import { cleanup, render } from "@testing-library/react";
-import "jsdom-global/register";
-import React, { Fragment, FunctionComponent, ReactNode } from "react";
-import { isElement } from "react-is";
 import test from "tape";
 import flattenChildren from "./index";
+import TestRenderer, { ReactTestRendererTree } from "react-test-renderer";
+import React, { Fragment, FunctionComponent, ReactNode } from "react";
+import { isElement } from "react-is";
 
 const Assert: FunctionComponent<{
   assert: (result: ReturnType<typeof flattenChildren>) => void;
-  children: ReactNode;
-}> = (props) => {
+  children: ReactNode
+}> = (props: any) => {
   const result = flattenChildren(props.children);
   props.assert(result);
-  return (
-    <div data-testid="assert-container">
-      {React.Children.map(result, (child) =>
-        React.isValidElement(child)
-          ? React.cloneElement(child, {
-              "data-reactkey": child.key,
-            } as React.HTMLAttributes<HTMLElement>)
-          : child
-      )}
-    </div>
-  );
+  return <div>{result}</div>;
 };
 
-function getRenderedChildren(container: HTMLElement) {
-  const assertContainer = container.querySelector(
-    '[data-testid="assert-container"]'
-  );
-  if (!assertContainer) throw new Error("No assert container found");
-  return Array.from(assertContainer.children);
+function getRenderedChildren(rendererTree: ReactTestRendererTree | null) {
+  if (!rendererTree || !rendererTree.rendered) throw new Error("No render");
+
+  // if rendered is an array, return the array of children from each tree
+  if (Array.isArray(rendererTree.rendered)) {
+    return rendererTree.rendered.reduce((acc: Array<any>, tree: ReactTestRendererTree) => {
+      if (tree.props && tree.props.children) {
+        return acc.concat(tree.props.children);
+      } else {
+        throw new Error("No rendered props.children in one of the trees");
+      }
+    }, []);
+  }
+
+  // if rendered is a single tree
+  if (!rendererTree.rendered.props || !rendererTree.rendered.props.children)
+    throw new Error("No rendered props.children");
+
+
+  return rendererTree.rendered.props.children as Array<any>;
 }
 
-test("simple children", function (t) {
+test("simple children", function(t) {
   t.plan(5);
 
-  const { container } = render(
+  TestRenderer.create(
     <Assert
-      assert={(result) => {
+      assert={result => {
         // this inner function tests the return value of flattenChildren
         t.equal(result.length, 4, "array length");
 
-        t.equal(isElement(result[0]) && result[0].key, ".0", "0th element key");
+        t.equal(
+          isElement(result[0]) && result[0].key,
+          ".0",
+          "0th element key"
+        );
         t.equal(result[1], "two", "1st text child");
-        t.equal(isElement(result[2]) && result[2].key, ".2", "2nd element key");
+        t.equal(
+          isElement(result[2]) && result[2].key,
+          ".2",
+          "2nd element key"
+        );
         t.equal(result[3], "10", "3rd number child");
       }}
     >
@@ -56,19 +67,29 @@ test("simple children", function (t) {
   );
 });
 
-test.onFinish(cleanup);
-
-test("conditional children", function (t) {
+test("conditional children", function(t) {
   t.plan(4);
 
-  const { container } = render(
+  TestRenderer.create(
     <Assert
-      assert={(result) => {
+      assert={result => {
         t.equal(result.length, 3, "array length");
 
-        t.equal(isElement(result[0]) && result[0].key, ".0", "0th element key");
-        t.equal(isElement(result[1]) && result[1].key, ".2", "2nd element key");
-        t.equal(isElement(result[2]) && result[2].key, ".4", "4th element key");
+        t.equal(
+          isElement(result[0]) && result[0].key,
+          ".0",
+          "0th element key"
+        );
+        t.equal(
+          isElement(result[1]) && result[1].key,
+          ".2",
+          "2nd element key"
+        );
+        t.equal(
+          isElement(result[2]) && result[2].key,
+          ".4",
+          "4th element key"
+        );
       }}
     >
       <span>one</span>
@@ -80,12 +101,12 @@ test("conditional children", function (t) {
   );
 });
 
-test("keyed children", function (t) {
+test("keyed children", function(t) {
   t.plan(2);
 
-  const { container } = render(
+  TestRenderer.create(
     <Assert
-      assert={(result) => {
+      assert={result => {
         t.equal(result.length, 5, "array length");
         t.deepEqual(
           result.map((c: any) => c.key),
@@ -103,12 +124,12 @@ test("keyed children", function (t) {
   );
 });
 
-test("fragment children", function (t) {
+test("fragment children", function(t) {
   t.plan(2);
 
-  const { container } = render(
+  TestRenderer.create(
     <Assert
-      assert={(result) => {
+      assert={result => {
         t.equal(result.length, 3, "array length");
         t.deepEqual(
           result.map((c: any) => c.key),
@@ -128,12 +149,12 @@ test("fragment children", function (t) {
   );
 });
 
-test("keyed fragment children", function (t) {
+test("keyed fragment children", function(t) {
   t.plan(2);
 
-  const { container } = render(
+  TestRenderer.create(
     <Assert
-      assert={(result) => {
+      assert={result => {
         t.equal(result.length, 3, "array length");
         t.deepEqual(
           result.map((c: any) => c.key),
@@ -153,12 +174,12 @@ test("keyed fragment children", function (t) {
   );
 });
 
-test("array children", function (t) {
+test("array children", function(t) {
   t.plan(2);
 
-  const { container } = render(
+  TestRenderer.create(
     <Assert
-      assert={(result) => {
+      assert={result => {
         t.equal(result.length, 5, "array length");
         t.deepEqual(
           result.map((c: any) => c.key),
@@ -174,12 +195,12 @@ test("array children", function (t) {
   );
 });
 
-test("renders through to react", function (t) {
+test("renders through to react", function(t) {
   t.plan(3);
 
-  const { container } = render(
+  const result = TestRenderer.create(
     <Assert
-      assert={(result) => {
+      assert={result => {
         t.equal(result.length, 6, "array length");
       }}
     >
@@ -195,13 +216,15 @@ test("renders through to react", function (t) {
       </Fragment>
       <span>foot</span>
     </Assert>
-  );
+  ).toTree();
 
-  const children = getRenderedChildren(container);
+  // and this tests that the array returned by flattenChildren will be rendered
+  // correctly by React
+  const children = getRenderedChildren(result);
 
   t.equal(children.length, 6, "props.children.length");
   t.deepEqual(
-    Array.from(children).map((child) => child.getAttribute("data-reactkey")),
+    children.map((c: any) => c.key),
     [".0", ".$apple..$one", ".$apple..$two", ".2", ".$banana..$three", ".5"],
     "element keys"
   );

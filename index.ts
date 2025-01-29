@@ -1,27 +1,21 @@
 /* Returns React children into an array, flattening fragments. */
 import {
-  Children,
-  ReactElement,
   ReactNode,
-  cloneElement,
+  ReactChild,
+  Children,
   isValidElement,
+  cloneElement
 } from "react";
 import { isFragment } from "react-is";
-
-function isFragmentWithChildren(
-  node: unknown
-): node is ReactElement<{ children: ReactNode }> {
-  return isFragment(node);
-}
 
 export default function flattenChildren(
   children: ReactNode,
   depth: number = 0,
   keys: (string | number)[] = []
-): ReactNode[] {
+): ReactChild[] {
   return Children.toArray(children).reduce(
-    (acc: ReactNode[], node, nodeIndex) => {
-      if (isFragmentWithChildren(node)) {
+    (acc: ReactChild[], node, nodeIndex) => {
+      if (isFragment(node)) {
         acc.push.apply(
           acc,
           flattenChildren(
@@ -34,7 +28,7 @@ export default function flattenChildren(
         if (isValidElement(node)) {
           acc.push(
             cloneElement(node, {
-              key: keys.concat(String(node.key)).join("."),
+              key: keys.concat(String(node.key)).join('.')
             })
           );
         } else if (typeof node === "string" || typeof node === "number") {
