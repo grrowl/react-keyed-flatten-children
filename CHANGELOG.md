@@ -1,4 +1,8 @@
-# 3.1.1
+# 4.0.0
+
+React 19 support! (thanks for the help @bmv437, @benface)
+
+# 3.2.0
 
 Revert `react-is` bump, since it breaks React 18! Sorry!
 

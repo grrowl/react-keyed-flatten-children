@@ -2,6 +2,8 @@
 
 Similar to [React's built-in `Children.toArray` method](https://reactjs.org/docs/react-api.html#reactchildrentoarray), this utility takes children and returns them as an array for introspection or filtering. Different from `Children.toArray`, it will flatten arrays and `React.Fragment`s into a regular, one-dimensional array while ensuring element and fragment keys are preserved, unique, and stable between renders.
 
+⚠️ As of v4.0.0, this library only supports React 19. If you're using React 18 or under, stay on the (still maintained) v3.2.0+.
+
 ## getting started
 
 ```
