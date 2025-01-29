@@ -1,3 +1,13 @@
+# 3.1.1
+
+Revert `react-is` bump, since it breaks React 18! Sorry!
+
+Fix to README.md example (thanks @nilportugues)
+
+# 3.1.0
+
+Bump `react-is` to fix React 19 compatability
+
 # 3.0.2
 
 Bump braces from 3.0.2 to 3.0.3
