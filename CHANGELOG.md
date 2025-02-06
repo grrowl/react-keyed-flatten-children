@@ -1,3 +1,7 @@
+# 5.0.0
+
+Move `react-is` to a peer dependency so we can support all react versions in a single version. (thanks @imjordanxd!)
+
 # 4.0.0
 
 React 19 support! (thanks for the help @bmv437, @benface)

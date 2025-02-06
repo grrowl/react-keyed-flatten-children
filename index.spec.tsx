@@ -56,7 +56,39 @@ test("simple children", function (t) {
   );
 });
 
-test.onFinish(cleanup);
+test("nested arrays and fragments with mixed content", function (t) {
+  t.plan(2);
+
+  const { container } = render(
+    <Assert
+      assert={(result) => {
+        t.equal(result.length, 8, "array length");
+        t.deepEqual(
+          result.map((c: any) => c.key),
+          [
+            ".0",
+            undefined,
+            ".1:$a",
+            undefined,
+            ".1:2:$b",
+            undefined,
+            undefined,
+            ".2",
+          ],
+          "element keys"
+        );
+      }}
+    >
+      <span>start</span>
+      {[
+        "one",
+        <span key="a">nested element</span>,
+        ["two", <span key="b">deep element</span>, "three", 4],
+      ]}
+      <span>end</span>
+    </Assert>
+  );
+});
 
 test("conditional children", function (t) {
   t.plan(4);
@@ -206,3 +238,5 @@ test("renders through to react", function (t) {
     "element keys"
   );
 });
+
+test.onFinish(cleanup);
