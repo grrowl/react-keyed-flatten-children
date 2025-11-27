@@ -56,6 +56,44 @@ test("simple children", function (t) {
   );
 });
 
+test("bigint children", function (t) {
+  t.plan(4);
+
+  const { container } = render(
+    <Assert
+      assert={(result) => {
+        t.equal(result.length, 4, "array length");
+
+        t.equal(isElement(result[0]) && result[0].key, ".0", "0th element key");
+        t.equal(result[1], 10n, "1st bigint child");
+        t.equal(result[3], BigInt(20), "3rd BigInt() child");
+      }}
+    >
+      <span>one</span>
+      {10n}
+      <span>two</span>
+      {BigInt(20)}
+    </Assert>
+  );
+});
+
+test("bigint in nested fragments", function (t) {
+  t.plan(2);
+
+  const { container } = render(
+    <Assert
+      assert={(result) => {
+        t.equal(result.length, 1, "array length");
+        t.equal(result[0], 100n, "nested bigint preserved");
+      }}
+    >
+      <>
+        <>{100n}</>
+      </>
+    </Assert>
+  );
+});
+
 test("nested arrays and fragments with mixed content", function (t) {
   t.plan(2);
 
