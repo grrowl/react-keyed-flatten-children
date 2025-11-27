@@ -1,6 +1,6 @@
 {
   "name": "react-keyed-flatten-children",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Flattens React children and fragments to an array with predictable and stable keys",
   "type": "module",
   "exports": {
