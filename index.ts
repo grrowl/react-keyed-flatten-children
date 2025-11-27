@@ -37,7 +37,11 @@ export default function flattenChildren(
               key: keys.concat(String(node.key)).join("."),
             })
           );
-        } else if (typeof node === "string" || typeof node === "number") {
+        } else if (
+          typeof node === "string" ||
+          typeof node === "number" ||
+          typeof node === "bigint"
+        ) {
           acc.push(node);
         }
       }
