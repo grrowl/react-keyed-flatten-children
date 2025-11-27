@@ -1,3 +1,9 @@
+# 5.1.1
+
+Bump dependencies (esbuild, tsup, tsx, form-data)
+
+Add Node 22 and 24 to CI test matrix, drop Node 16
+
 # 5.1.0
 
 Add BigInt support for React 19. BigInts are now preserved in the flattened output when using React 19+. (thanks @benface!)
