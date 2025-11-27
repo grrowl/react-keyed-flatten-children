@@ -1,3 +1,7 @@
+# 5.1.0
+
+Add BigInt support for React 19. BigInts are now preserved in the flattened output when using React 19+. (thanks @benface!)
+
 # 5.0.0
 
 Move `react-is` to a peer dependency so we can support all react versions in a single version. (thanks @imjordanxd!)
