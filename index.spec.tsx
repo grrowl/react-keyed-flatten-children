@@ -1,9 +1,12 @@
 import { cleanup, render } from "@testing-library/react";
 import "jsdom-global/register";
-import React, { Fragment, FunctionComponent, ReactNode } from "react";
+import React, { Fragment, FunctionComponent, ReactNode, version } from "react";
 import { isElement } from "react-is";
 import test from "tape";
 import flattenChildren from "./index";
+
+// React 19+ supports BigInt as children, React 18 does not
+const REACT_MAJOR = parseInt(version.split(".")[0], 10);
 
 const Assert: FunctionComponent<{
   assert: (result: ReturnType<typeof flattenChildren>) => void;
@@ -56,42 +59,79 @@ test("simple children", function (t) {
   );
 });
 
+// BigInt rendering is only supported in React 19+.
+// React 18's Children.toArray strips BigInts before flattenChildren sees them.
 test("bigint children", function (t) {
-  t.plan(4);
+  if (REACT_MAJOR >= 19) {
+    t.plan(4);
 
-  const { container } = render(
-    <Assert
-      assert={(result) => {
-        t.equal(result.length, 4, "array length");
+    const { container } = render(
+      <Assert
+        assert={(result) => {
+          t.equal(result.length, 4, "array length");
+          t.equal(isElement(result[0]) && result[0].key, ".0", "0th element key");
+          t.equal(result[1], 10n, "1st bigint child");
+          t.equal(result[3], BigInt(20), "3rd BigInt() child");
+        }}
+      >
+        <span>one</span>
+        {10n}
+        <span>two</span>
+        {BigInt(20)}
+      </Assert>
+    );
+  } else {
+    // React 18: BigInts are filtered out by Children.toArray
+    t.plan(2);
 
-        t.equal(isElement(result[0]) && result[0].key, ".0", "0th element key");
-        t.equal(result[1], 10n, "1st bigint child");
-        t.equal(result[3], BigInt(20), "3rd BigInt() child");
-      }}
-    >
-      <span>one</span>
-      {10n}
-      <span>two</span>
-      {BigInt(20)}
-    </Assert>
-  );
+    const { container } = render(
+      <Assert
+        assert={(result) => {
+          t.equal(result.length, 2, "array length (bigints filtered)");
+          t.equal(isElement(result[0]) && result[0].key, ".0", "0th element key");
+        }}
+      >
+        <span>one</span>
+        {10n}
+        <span>two</span>
+        {BigInt(20)}
+      </Assert>
+    );
+  }
 });
 
 test("bigint in nested fragments", function (t) {
-  t.plan(2);
+  if (REACT_MAJOR >= 19) {
+    t.plan(2);
 
-  const { container } = render(
-    <Assert
-      assert={(result) => {
-        t.equal(result.length, 1, "array length");
-        t.equal(result[0], 100n, "nested bigint preserved");
-      }}
-    >
-      <>
-        <>{100n}</>
-      </>
-    </Assert>
-  );
+    const { container } = render(
+      <Assert
+        assert={(result) => {
+          t.equal(result.length, 1, "array length");
+          t.equal(result[0], 100n, "nested bigint preserved");
+        }}
+      >
+        <>
+          <>{100n}</>
+        </>
+      </Assert>
+    );
+  } else {
+    // React 18: BigInts are filtered out
+    t.plan(1);
+
+    const { container } = render(
+      <Assert
+        assert={(result) => {
+          t.equal(result.length, 0, "array length (bigint filtered)");
+        }}
+      >
+        <>
+          <>{100n}</>
+        </>
+      </Assert>
+    );
+  }
 });
 
 test("nested arrays and fragments with mixed content", function (t) {
