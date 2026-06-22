@@ -1,3 +1,13 @@
+# 5.1.3
+
+Bump dependencies to resolve security advisories (form-data, glob, picomatch, ws, @babel/runtime, brace-expansion). All are transitive devDependencies — no consumer-facing changes.
+
+# 5.1.2
+
+Dependency security updates:
+- Bump minimatch
+- Bump rollup from 4.45.1 to 4.59.0
+
 # 5.1.1
 
 Bump dependencies (esbuild, tsup, tsx, form-data)
