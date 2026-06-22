@@ -14,7 +14,7 @@
   "homepage": "https://github.com/grrowl/react-keyed-flatten-children",
   "repository": {
     "type": "git",
-    "url": "https://github.com/grrowl/react-keyed-flatten-children.git"
+    "url": "git+https://github.com/grrowl/react-keyed-flatten-children.git"
   },
   "scripts": {
     "build": "tsup index.ts --format esm,cjs --clean --dts --cjsInterop --splitting",
