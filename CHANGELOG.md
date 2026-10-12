@@ -1,3 +1,7 @@
+# 5.1.4
+
+Bump brace-expansion (1.1.21, 2.1.7) to resolve security advisories. Transitive devDependency only — no consumer-facing changes.
+
 # 5.1.3
 
 Bump dependencies to resolve security advisories (form-data, glob, picomatch, ws, @babel/runtime, brace-expansion). All are transitive devDependencies — no consumer-facing changes.
